@@ -1,0 +1,51 @@
+:root{
+    --dark-brown: #483838;
+    --dark-green: #42855B;
+    --light-green: #90B77D;
+    --very-light-green: #D2D79F;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 62.5%;
+}
+
+body{
+    background-color: var(--dark-brown);
+    color: white;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    place-items: center;
+}
+
+.game-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+}
+
+.buttons{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(3,1fr);
+    grid-template-areas: 
+    ".button--up .button--up"" ."
+    ".button--left . .button--right"
+    ". .button--down .";
+    width: 80%;
+    height: auto;
+    flex-wrap: wrap;
+}
+
+.button{
+    width: 80px;
+    height: 50px;
+    border-radius: 15px;
+    background-color: var(--dark-green);
+    color: white;
+}
