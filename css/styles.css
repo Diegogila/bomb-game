@@ -14,38 +14,73 @@ html{
     font-size: 62.5%;
 }
 
-body{
+main{
+    display: grid;
+    place-items: center;
     background-color: var(--dark-brown);
     color: white;
-    display: grid;
+    /*display: grid;
     grid-template-rows: auto 1fr auto;
-    place-items: center;
-}
+    place-items: center;*/
+    height: 100vh;
+} 
 
 .game-container{
-    display: flex;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    place-items: center;
+    /*display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center;*/
     width: 90%;
+    height: 90%;
+    row-gap: 20px;
+    background-color: var(--dark-brown);
+    color: white;
+}
+.game{
+    background-color: var(--very-light-green);
+    border: 4px solid var(--dark-green);
+    border-radius: 15px;
 }
 
 .buttons{
     display: grid;
     grid-template-columns: repeat(3,1fr);
     grid-template-rows: repeat(3,1fr);
-    grid-template-areas: 
-    ".button--up .button--up"" ."
-    ".button--left . .button--right"
-    ". .button--down .";
     width: 80%;
     height: auto;
     flex-wrap: wrap;
+    place-items: center;
 }
 
 .button{
     width: 80px;
     height: 50px;
     border-radius: 15px;
+    background-color: var(--light-green);
+    color: white;
+}
+
+.button:hover{
     background-color: var(--dark-green);
     color: white;
+}
+
+.button--up{
+    grid-column: 2 / 3;
+    grid-row: 1 /2
+}
+
+.button--down{
+    grid-column: 2 / 3;
+    grid-row: 3 /4;
+}
+.button--right{
+    grid-column: 3 / 4;
+    grid-row: 2 /3;
+}
+.button--left{
+    grid-column: 1 / 2;
+    grid-row: 2 /3;
 }
