@@ -4,8 +4,14 @@ const game = canvas.getContext('2d');
 
 window.addEventListener('load',startGame);
 function startGame(){
-    canvas.setAttribute('width', window.innerWidth * 0.75);
-    canvas.setAttribute('height', window.innerHeight * 0.5);
+    let canvasSize;
+    if (window.innerHeight > window.innerWidth) {
+        canvasSize = window.innerWidth * 0.75;
+    } else {
+        canvasSize = window.innerHeight *0.5;
+    }
+    canvas.setAttribute('width', canvasSize);
+    canvas.setAttribute('height', canvasSize);
     
     //window.innerHeight
     window.innerWidth
