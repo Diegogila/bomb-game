@@ -40,16 +40,17 @@ main{
     color: white;
 }
 .game{
+    /*box-sizing: content-box;*/
     background-color: var(--very-light-green);
-    border: 4px solid var(--dark-green);
-    border-radius: 15px;
+    /*border: 4px solid var(--dark-green);
+    border-radius: 15px;*/
 }
 
 .buttons{
     display: grid;
     grid-template-columns: repeat(3,1fr);
     grid-template-rows: repeat(4,1fr);
-    width: 50%;
+    min-width: 165px;
     height: auto;
     flex-wrap: wrap;
     place-items: center;
@@ -88,7 +89,5 @@ main{
 }
 
 .stats{
-    display: flex;
-    flex-direction: column;
     font-size: 2.4rem;
 }
