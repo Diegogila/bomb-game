@@ -21,14 +21,18 @@ function startGame(){
     const map = maps[2];
     const mapRows = map.trim().split('\n');
     const mapCols = mapRows.map(row => row.trim().split(''));
-    console.log(mapCols)
+    mapCols.forEach((row, x) => {
+        row.forEach((col, y) => {
+            game.fillText(emojis[col],elementSize * (y+1), elementSize * (x+1));})
+        })
+        
     
 
-    for (let row = 1; row <= 10; row++) {
+    /*for (let row = 1; row <= 10; row++) {
         for (let col = 1; col <= 10; col++) {
             game.fillText(emojis[mapCols[row - 1][col - 1]],elementSize * col,elementSize * row);   
         }
-    }
+    }*/
     
     //window.innerHeight
     //window.innerWidth
