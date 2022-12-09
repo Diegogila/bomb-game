@@ -17,13 +17,18 @@ function startGame(){
     console.log({canvasSize, elementSize}); 
     game.font = `${elementSize}px Verdana`;
     game.textAlign = `end`;
-    game.fillText(emojis['X'],elementSize,elementSize);
+
+    const map = maps[2];
+    const mapRows = map.trim().split('\n');
+    const mapCols = mapRows.map(row => row.trim().split(''));
+    console.log(mapCols)
     
 
-    /*for (let i = 1; i <= 10; i++) {
-        game.fillText(emojis['X'],elementSize * i,elementSize);
-        console.log(i);
-    }*/
+    for (let row = 1; row <= 10; row++) {
+        for (let col = 1; col <= 10; col++) {
+            game.fillText(emojis[mapCols[row - 1][col - 1]],elementSize * col,elementSize * row);   
+        }
+    }
     
     //window.innerHeight
     //window.innerWidth
