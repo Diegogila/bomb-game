@@ -3,6 +3,18 @@ const game = canvas.getContext('2d');
 
 
 window.addEventListener('load',startGame);
+
+
+class Player{
+    constructor(icon, x, y){
+        this.icon = icon;
+        this.x = undefined;
+        this.y = undefined;
+    }
+
+
+}
+
 function startGame(){
     let canvasSize;
     if (window.innerHeight > window.innerWidth) {
@@ -18,16 +30,22 @@ function startGame(){
     game.font = `${elementSize}px Verdana`;
     game.textAlign = `end`;
 
-    const map = maps[2];
+    const map = maps[1];
     const mapRows = map.trim().split('\n');
     const mapCols = mapRows.map(row => row.trim().split(''));
-    mapCols.forEach((row, x) => {
-        row.forEach((col, y) => {
-            game.fillText(emojis[col],elementSize * (y+1), elementSize * (x+1));})
-        })
-        
-    
 
+    const player = new Player(emojis["I"]);
+    
+    mapCols.forEach((row, y) => {
+        row.forEach((col, x) => {
+            if (col == "I") {
+                player.y = y;
+                player.x = x;
+            }
+            game.fillText(emojis[col],elementSize * (x+1), elementSize * (y+1));})
+        }) 
+
+        console.log(player);
     /*for (let row = 1; row <= 10; row++) {
         for (let col = 1; col <= 10; col++) {
             game.fillText(emojis[mapCols[row - 1][col - 1]],elementSize * col,elementSize * row);   
@@ -39,3 +57,4 @@ function startGame(){
  /*game.fillRect(0,0,100,100);
  game.clearRect(50,50,50,50);*/
 }
+
