@@ -12,8 +12,9 @@ class Player{
         this.y = undefined;
     }
 
-
 }
+
+
 
 function startGame(){
     let canvasSize;
@@ -35,26 +36,55 @@ function startGame(){
     const mapCols = mapRows.map(row => row.trim().split(''));
 
     const player = new Player(emojis["I"]);
-    
-    mapCols.forEach((row, y) => {
-        row.forEach((col, x) => {
-            if (col == "I") {
-                player.y = y;
-                player.x = x;
-            }
-            game.fillText(emojis[col],elementSize * (x+1), elementSize * (y+1));})
-        }) 
 
+    function render(map){
+        map.forEach((row, y) => {
+            row.forEach((col, x) => {
+                if (col == "I") {
+                    player.y = y+1;
+                    player.x = x+1;
+                }
+                game.fillText(emojis[col],elementSize * (x+1), elementSize * (y+1));})
+            }) 
+    }
+    render(mapCols);
         console.log(player);
+    
+        
+    window.addEventListener('keydown', (event) => {
+        console.log(event.key)
+        game.clearRect(0,0,canvasSize,canvasSize);
+        const colicionObj = mapCols[player.y-2][player.x-1];
+        switch (event.key) {
+            case "ArrowUp":
+                    mapCols[player.y-2][player.x-1] = "I";
+                    mapCols[player.y-1][player.x-1] = colicionObj;   
+                break;
+            case "ArrowRight":
+    
+                break;
+            case "ArrowDown":
+      
+                break;
+            case "ArrowLeft":
+                
+                break;                
+                
+                default:
+                    break;
+                }
+                if (colicionObj != "X") {
+                    mapCols[player.y-1][player.x+1] = "I";
+                    mapCols[player.y-1][player.x-1] = colicionObj;
+                } else {
+                    console.log("perdiste");
+                }
+        render(mapCols); 
+    });   
     /*for (let row = 1; row <= 10; row++) {
         for (let col = 1; col <= 10; col++) {
             game.fillText(emojis[mapCols[row - 1][col - 1]],elementSize * col,elementSize * row);   
         }
     }*/
-    
-    //window.innerHeight
-    //window.innerWidth
- /*game.fillRect(0,0,100,100);
- game.clearRect(50,50,50,50);*/
 }
 
