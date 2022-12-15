@@ -10,8 +10,21 @@ class Player{
         this.icon = icon;
         this.x = undefined;
         this.y = undefined;
+        this.initialPotition = {};
     }
-
+    move(map,y,x,render){
+        let colObj = map[this.y+y][this.x+x];
+        if (colObj == "X") {
+            map[this.y][this.x] = "-";
+            map[this.initialPotition.y][this.initialPotition.x]='I';
+        } else if(this.y+y < 0 || this.x+x < 0){
+            map[this.y][this.x] = "I";
+        }else{
+            map[this.y+y][this.x+x] = "I";
+            map[this.y][this.x] = colObj;   
+        }
+        render(map); 
+    }
 }
 
 
@@ -41,45 +54,51 @@ function startGame(){
         map.forEach((row, y) => {
             row.forEach((col, x) => {
                 if (col == "I") {
-                    player.y = y+1;
-                    player.x = x+1;
+                    player.y = y;
+                    player.x = x;
+                    
                 }
                 game.fillText(emojis[col],elementSize * (x+1), elementSize * (y+1));})
             }) 
     }
     render(mapCols);
+    player.initialPotition = {
+        y:player.y,
+        x:player.x};
         console.log(player);
     
         
     window.addEventListener('keydown', (event) => {
         console.log(event.key)
         game.clearRect(0,0,canvasSize,canvasSize);
-        const colicionObj = mapCols[player.y-2][player.x-1];
         switch (event.key) {
             case "ArrowUp":
-                    mapCols[player.y-2][player.x-1] = "I";
-                    mapCols[player.y-1][player.x-1] = colicionObj;   
+                player.move(mapCols,-1,0,render);
                 break;
             case "ArrowRight":
-    
+                player.move(mapCols,0,1,render);
                 break;
             case "ArrowDown":
-      
+                player.move(mapCols,1,0,render);
                 break;
             case "ArrowLeft":
-                
+                player.move(mapCols,0,-1,render);
+                /*colicionObj = mapCols[player.y-1][player.x-2];
+                if (colicionObj != "X") {
+                    mapCols[player.y-1][player.x-2] = "I";
+                    mapCols[player.y-1][player.x-1] = colicionObj;   
+                } else{
+                    mapCols[player.y-1][player.x-1] = "-";
+                    mapCols[player.initialPotition.y-1][player.initialPotition.x-1]='I';
+                }*/
                 break;                
                 
                 default:
                     break;
                 }
-                if (colicionObj != "X") {
-                    mapCols[player.y-1][player.x+1] = "I";
-                    mapCols[player.y-1][player.x-1] = colicionObj;
-                } else {
-                    console.log("perdiste");
-                }
+    
         render(mapCols); 
+        console.log(player);
     });   
     /*for (let row = 1; row <= 10; row++) {
         for (let col = 1; col <= 10; col++) {
